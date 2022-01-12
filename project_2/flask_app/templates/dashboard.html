@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Welcome {{user.username}}!</h1>
+    <div class="container">
+        <h1>Welcome to the Wild West!</h1>
+        <div>Your Gold: {{session["gold"]}}</div>
+        <div class="cards">
+            <form action="/process" method="post" class="card">
+                <div>
+                    <h1>Pickpocket Guard</h1>
+                    <span>(earns 10-20 golds)</span>
+                </div>
+                <input type="hidden" name="human" value="guard" />
+                <input type="submit" value="gold1" />
+            </form>
+
+            <form action="/process" method="post" class="card">
+                <div>
+                    <h1>Pickpocket Farmer</h1>
+                    <span>(earns 5-10 golds)</span>
+                </div>
+                <input type="hidden" name="human" value="farmer" />
+                <input type="submit" value="gold1" />
+            </form>
+
+            <form action="/process" method="post" class="card">
+                <div>
+                    <h1>Pickpocket Man/Woman</h1>
+                    <span>(earns 2-5 golds)</span>
+                </div>
+                <input type="hidden" name="human" value="man" />
+                <input type="submit" value="gold1" />
+            </form>
+
+
+            <form action="/process" method="post" class="card">
+                <div>
+                    <h1>Casino</h1>
+                    <span>(earns/takes 0-50 golds)</span>
+                </div>
+                <input type="hidden" name="human" value="casino" />
+                <input type="submit" value="gold1" />
+            </form>
+        </div>
+            <div>
+                <form action="/reset" method="post">
+                    <input type="submit" value="Reset" />
+                </form>
+            </div>
+            <div>
+                <form action="/reset" method="post">
+                    <input type="submit" value="Reset" />
+                </form>
+            </div>
+            <div class="activities">
+                <h2>Activities:</h2>
+                <div class="board">
+                    <ul>
+                        {%for x in session["activities"] %}
+                        {%if x["earn"] == "true"%}
+                        <li style="color: green;">
+                            Pickpocketed {{x["gold"]}} gold from the {{x["human"]}}! {{x["time"]}}
+                        </li>
+                        {%else%}
+                        <li style="color: red;">
+                            Entered the casino and lost {{x["gold"]}} gold! {{x["time"]}}
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+    </div>
+
+</body>
+</html>
