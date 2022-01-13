@@ -32,7 +32,6 @@ def submitForm():
     if human == 'casino':
         gold = randrange(-50, 51)
     session["gold"] += gold
-    session["count"] += 1
     now = datetime.now()
     current_time = now.strftime("%D %H: %M: %S")
 
